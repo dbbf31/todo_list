@@ -1,0 +1,23 @@
+  <h1>代辦事項</h1>
+   <tr>
+<table class="table table-striped table-condensed">
+    <tr>
+        <td>事項</td>
+        <td>細節</td>
+        <td>編輯</td>
+        <td>刪除</td>
+    </tr>
+    <% @todos.each do |todo| %>
+      <td><%= todo.name %></td>
+      <td><%= link_to 'Show', todo_path(todo) %></td>
+      <td><%= link_to 'Edit', edit_todo_path(todo) %></td>
+      <% if todo.date < Time.new.to_date %>
+        <td><%= "overdue" %></td>
+      <% else %>
+        <td><%= link_to 'Destroy', todo_path(todo), method: :delete, data:{ confirm: "Are you sure?" } %></td>
+      <% end %>
+    </tr>
+    <% end %>
+</table>
+
+<%= link_to 'New Todo', new_todo_path %>
